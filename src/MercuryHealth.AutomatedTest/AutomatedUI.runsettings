@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <!-- Configurations that affect the Test Framework -->
+  <!-- Configurations for data collectors -->
+  <!-- Parameters used by tests at runtime -->
+  <TestRunParameters>
+    <Parameter name="browserType" value="chrome" />
+    <Parameter name="appUrl" value="http://abelmercuryhealth-dev.azurewebsites.net" />
+  </TestRunParameters>
+  <!-- Adapter Specific sections -->
+  <!-- MSTest adapter -->
+</RunSettings>

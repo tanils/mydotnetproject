@@ -1,0 +1,263 @@
+resources:
+
+- repo: self
+
+phases:
+
+- phase: WebApp
+
+
+
+  queue:
+
+    name: Hosted VS2017
+
+    demands:
+    - msbuild
+    - visualstudio
+    - vstest
+
+
+
+
+
+#Your build definition references an undefined variable named ‘build.artifactstagingdirectory’. Create or edit the build definition for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+#Your build definition references an undefined variable named ‘build.artifactstagingdirectory’. Create or edit the build definition for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+  steps:
+
+  - task: NuGetCommand@2
+
+
+
+  - task: whitesource.ws-bolt.bolt.wss.WhiteSource Bolt@1
+
+
+
+  - task: VSBuild@1
+
+
+
+  - task: VSTest@2
+
+
+
+  - task: PublishSymbols@1
+
+
+
+  - task: CopyFiles@2
+
+    inputs:
+
+      TargetFolder: '$(build.artifactstagingdirectory)'
+
+
+
+  - task: PublishBuildArtifacts@1
+
+    inputs:
+
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+
+      ArtifactName: drop
+
+      publishLocation: Container
+
+
+
+
+
+- phase: MobileiOS
+
+
+
+  queue:
+
+    name: Hosted macOS Preview
+
+    demands: 
+
+    - xcode
+
+    - Xamarin.iOS
+
+
+
+
+
+#Your build definition references an undefined variable named ‘build.artifactstagingdirectory’. Create or edit the build definition for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+#Your build definition references an undefined variable named ‘build.artifactstagingdirectory’. Create or edit the build definition for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+  steps:
+
+  - task: InstallAppleProvisioningProfile@1
+
+    inputs:
+
+      provProfileSecureFile: 'b6c1e8ad-5c13-477a-b378-29dee40e117d'
+
+
+
+  - task: InstallAppleCertificate@1
+
+    inputs:
+
+      certSecureFile: 'f4434b62-e61f-44f8-bed6-595819e379f4'
+
+
+
+  - task: NuGetCommand@2
+
+
+
+  - task: XamariniOS@1
+
+
+
+  - task: AppCenterTest@1
+
+    inputs:
+
+      appFile: 'HealthClinic/HealthClinic.iOS/bin/iPhone/Debug/HealthClinic.iOS.ipa'
+
+      appiumBuildDirectory: 'HealthClinic/HealthClinic.UITests/bin/Debug'
+
+      serverEndpoint: AppCenter
+
+      appSlug: 'xandersparks/MercuryHealthiOS'
+
+      devices: 'xandersparks/mercuryhealthmobileset'
+
+
+
+  - task: CopyFiles@2
+
+    inputs:
+
+      TargetFolder: '$(build.artifactstagingdirectory)'
+
+
+
+  - task: PublishBuildArtifacts@1
+
+    inputs:
+
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+
+      ArtifactName: mobile
+
+      publishLocation: Container
+
+
+
+
+
+- phase: API_Service
+
+
+
+  queue:
+
+    name: Hosted Linux Preview
+
+#Your build definition references an undefined variable named ‘Build.StagingDirectory)/pub/MercuryHealthService’. Create or edit the build definition for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+#Your build definition references an undefined variable named ‘build.artifactstagingdirectory)/yam’. Create or edit the build definition for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+#Your build definition references an undefined variable named ‘build.artifactstagingdirectory)/yam’. Create or edit the build definition for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+  steps:
+
+  - task: DotNetCoreInstaller@0
+
+    inputs:
+
+      version: 2.0.0
+
+
+
+  - task: DotNetCoreCLI@2
+
+    inputs:
+
+      command: restore
+
+
+
+  - task: DotNetCoreCLI@2
+
+
+
+  - task: DotNetCoreCLI@2
+
+    inputs:
+
+      command: test
+
+
+
+  - task: DotNetCoreCLI@2
+
+    inputs:
+
+      command: publish
+
+
+
+  - task: CopyFiles@2
+
+    inputs:
+
+      Contents: Dockerfile
+
+      TargetFolder: '$(Build.StagingDirectory)/pub/MercuryHealthServices'
+
+
+
+  - task: Docker@0
+
+
+
+  - task: Docker@0
+
+    inputs:
+
+      azureSubscription: 'AbelSubscription (e97f6c4e-c830-479b-81ad-1aff1dd07470)'
+
+      azureContainerRegistry: '{"loginServer":"abelcontainerregistry.azurecr.io", "id" : "/subscriptions/e97f6c4e-c830-479b-81ad-1aff1dd07470/resourceGroups/SharedResourceRG/providers/Microsoft.ContainerRegistry/registries/AbelContainerRegistry"}'
+
+      action: 'Push images'
+
+      imageNamesPath: 'abelcontainerregistry.azurecr.io/techreadydemo:$(Build.BuildId)'
+
+
+
+  - task: CopyFiles@2
+
+    inputs:
+
+      Contents: |  
+        **/*.yaml
+        **/*.yml
+
+      TargetFolder: '$(build.artifactstagingdirectory)/yaml'
+
+
+
+  - task: PublishBuildArtifacts@1
+
+    inputs:
+
+      PathtoPublish: '$(build.artifactstagingdirectory)/yaml'
+
+      ArtifactName: K8
+
+      publishLocation: Container
+
+
+
+
+
