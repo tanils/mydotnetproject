@@ -35,37 +35,37 @@ namespace MercuryHEalth.CodedUITests
             System.Console.WriteLine("config file: " + configFile);
         }
 
-        [TestMethod]
-        [TestCategory("IETests")]
-        public void BrowseToHomePageTest()
-        {
-            HomePage.Launch(_homePageUrl, _browserType)
-                .VerifyHomePageReached();
+        //[TestMethod]
+        //[TestCategory("IETests")]
+        //public void BrowseToHomePageTest()
+        //{
+        //    HomePage.Launch(_homePageUrl, _browserType)
+        //        .VerifyHomePageReached();
             
-        }
+        //}
 
-        [TestMethod]
-        [TestCategory("IETests")]
-        public void BrowseToNutritionPageTest()
-        {
-            HomePage.Launch(_homePageUrl, _browserType)
-                .VerifyHomePageReached()
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached();
+        //[TestMethod]
+        //[TestCategory("IETests")]
+        //public void BrowseToNutritionPageTest()
+        //{
+        //    HomePage.Launch(_homePageUrl, _browserType)
+        //        .VerifyHomePageReached()
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached();
                 
-        }
+        //}
 
-        [TestMethod]
-        [TestCategory("IETests")]
-        public void BrowseToCreateFoodLogEntryTest()
-        {
-            HomePage.Launch(_homePageUrl, _browserType)
-                .VerifyHomePageReached()
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached()
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached();
-        }
+        //[TestMethod]
+        //[TestCategory("IETests")]
+        //public void BrowseToCreateFoodLogEntryTest()
+        //{
+        //    HomePage.Launch(_homePageUrl, _browserType)
+        //        .VerifyHomePageReached()
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached()
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached();
+        //}
 
 
         #region Additional test attributes
