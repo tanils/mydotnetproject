@@ -37,205 +37,205 @@ namespace MercuryHealth.AutomatedTest
         #endregion
 
         #region Tests
-        [TestMethod]
-        [TestCategory("UITests")]
-        public void BrowseToHomePageTest()
-        {
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached();
-        }
-
-        [TestMethod]
-        [TestCategory("UITests")]
-        public void BrowseToNutritionPageTest()
-        {
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached();
-        }
-
-        [TestMethod]
-        [TestCategory("UITests")]
-        public void BrowseToCreateFoodLogEntryTest()
-        {
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached()
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached();
-        }
-
-        [TestMethod]
+        //[TestMethod]
         //[TestCategory("UITests")]
-        public void Add1stDonutTest()
-        {
-            // browse to home page of app
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
+        //public void BrowseToHomePageTest()
+        //{
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached();
+        //}
 
-                //go to nutrition page
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached()
-
-                // clean up and delete all donuts 
-                .RemoveAllFood("Donut")
-
-                // click create new link to add new food
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached()
-
-                // add donut as a food item and click the add button
-                .SetDescription("Donut")
-                .ClickCreateButton()
-                .VerifyNutritionPageReached()
-                .VerifyFoodInTable("Donut", 1)
-
-                // clean up and delete all donuts 
-                .RemoveAllFood("Donut");
-
-        }
-
-        [TestMethod]
+        //[TestMethod]
         //[TestCategory("UITests")]
-        public void DeleteDonutTest()
-        {
-            // browse to home page of app
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
+        //public void BrowseToNutritionPageTest()
+        //{
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached();
+        //}
 
-                //go to nutrition page
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached()
-
-                // clean up and delete all donuts 
-                .RemoveAllFood("Donut")
-
-                // click create new link to add new food
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached()
-
-                // add donut as a food item and click the add button
-                .SetDescription("Donut")
-                .ClickCreateButton()
-                .VerifyNutritionPageReached()
-                .VerifyFoodInTable("Donut", 1)
-
-                // delete the donut
-                .ClickDeleteFood("Donut")
-                .VerifyDeleteFoodPageReached()
-                .ClickDeleteButton()
-                .VerifyNutritionPageReached()
-                .VerifyFoodNotInTable("Donut");
-        }
-
-        [TestMethod]
-        //[TestCategory("UITestsBroken")]
-        public void Add2ndDonutTest()
-        {
-            // browse to home page of app
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
-
-                //go to nutrition page
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached()
-
-                // clean up and delete all donuts 
-                .RemoveAllFood("Donut")
-
-                // click create new link to add new food
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached()
-
-                // add donut as a food item and click the add button
-                .SetDescription("Donut")
-                .ClickCreateButton()
-                .VerifyNutritionPageReached()
-                .VerifyFoodInTable("Donut", 1)
-
-                // add the second donut
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached()
-                .SetDescription("Donut")
-                .ClickCreateButton()
-                .VerifyNutritionPageReached()
-                .VerifyFoodInTable("Donut", 2);
-
-        }
-
-        [TestMethod]
+        //[TestMethod]
         //[TestCategory("UITests")]
-        public void EditDonutTest()
-        {
-            // browse to home page of app
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
+        //public void BrowseToCreateFoodLogEntryTest()
+        //{
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached()
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached();
+        //}
 
-                //go to nutrition page
-                .ClickNutritionLink()
-                .VerifyNutritionPageReached()
+        //[TestMethod]
+        ////[TestCategory("UITests")]
+        //public void Add1stDonutTest()
+        //{
+        //    // browse to home page of app
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
 
-                // clean up and delete all donuts 
-                .RemoveAllFood("Donut")
+        //        //go to nutrition page
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached()
 
-                // click create new link to add new food
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached()
+        //        // clean up and delete all donuts 
+        //        .RemoveAllFood("Donut")
 
-                // add donut as a food item and click the add button
-                .SetDescription("Donut")
-                .ClickCreateButton()
-                .VerifyNutritionPageReached()
-                .VerifyFoodInTable("Donut", 1)
+        //        // click create new link to add new food
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached()
 
-                // click on the edit for the donut
-                .ClickEditFoodLink("Donut")
-                .VerifyEditFoodPageReached()
-                .SetCarbs("999.99")
-                .ClickSaveButton()
-                .VerifyNutritionPageReached()
-                .VerifyCarbs("Donut", "999.99")
+        //        // add donut as a food item and click the add button
+        //        .SetDescription("Donut")
+        //        .ClickCreateButton()
+        //        .VerifyNutritionPageReached()
+        //        .VerifyFoodInTable("Donut", 1)
 
-                // clean up and delete all donuts 
-                .RemoveAllFood("Donut");
+        //        // clean up and delete all donuts 
+        //        .RemoveAllFood("Donut");
 
-        }
+        //}
 
-        [TestMethod]
-        //[TestCategory("UITests")]
-        public void BrowseToExercisePageTest()
-        {
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
-                .ClickExercisesLink()
-                .VerifyExercisePageReached();
-        }
+        //[TestMethod]
+        ////[TestCategory("UITests")]
+        //public void DeleteDonutTest()
+        //{
+        //    // browse to home page of app
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
 
-        [TestMethod]
-        //[TestCategory("UITests")]
-        public void BrowseToCreateExerciseEntryTest()
-        {
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
-                .ClickExercisesLink()
-                .VerifyExercisePageReached()
-                .ClickCreateNewLink()
-                .VerifyCreatePageReached();
-        }
+        //        //go to nutrition page
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached()
+
+        //        // clean up and delete all donuts 
+        //        .RemoveAllFood("Donut")
+
+        //        // click create new link to add new food
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached()
+
+        //        // add donut as a food item and click the add button
+        //        .SetDescription("Donut")
+        //        .ClickCreateButton()
+        //        .VerifyNutritionPageReached()
+        //        .VerifyFoodInTable("Donut", 1)
+
+        //        // delete the donut
+        //        .ClickDeleteFood("Donut")
+        //        .VerifyDeleteFoodPageReached()
+        //        .ClickDeleteButton()
+        //        .VerifyNutritionPageReached()
+        //        .VerifyFoodNotInTable("Donut");
+        //}
+
+        //[TestMethod]
+        ////[TestCategory("UITestsBroken")]
+        //public void Add2ndDonutTest()
+        //{
+        //    // browse to home page of app
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
+
+        //        //go to nutrition page
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached()
+
+        //        // clean up and delete all donuts 
+        //        .RemoveAllFood("Donut")
+
+        //        // click create new link to add new food
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached()
+
+        //        // add donut as a food item and click the add button
+        //        .SetDescription("Donut")
+        //        .ClickCreateButton()
+        //        .VerifyNutritionPageReached()
+        //        .VerifyFoodInTable("Donut", 1)
+
+        //        // add the second donut
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached()
+        //        .SetDescription("Donut")
+        //        .ClickCreateButton()
+        //        .VerifyNutritionPageReached()
+        //        .VerifyFoodInTable("Donut", 2);
+
+        //}
+
+        //[TestMethod]
+        ////[TestCategory("UITests")]
+        //public void EditDonutTest()
+        //{
+        //    // browse to home page of app
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
+
+        //        //go to nutrition page
+        //        .ClickNutritionLink()
+        //        .VerifyNutritionPageReached()
+
+        //        // clean up and delete all donuts 
+        //        .RemoveAllFood("Donut")
+
+        //        // click create new link to add new food
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached()
+
+        //        // add donut as a food item and click the add button
+        //        .SetDescription("Donut")
+        //        .ClickCreateButton()
+        //        .VerifyNutritionPageReached()
+        //        .VerifyFoodInTable("Donut", 1)
+
+        //        // click on the edit for the donut
+        //        .ClickEditFoodLink("Donut")
+        //        .VerifyEditFoodPageReached()
+        //        .SetCarbs("999.99")
+        //        .ClickSaveButton()
+        //        .VerifyNutritionPageReached()
+        //        .VerifyCarbs("Donut", "999.99")
+
+        //        // clean up and delete all donuts 
+        //        .RemoveAllFood("Donut");
+
+        //}
+
+        //[TestMethod]
+        ////[TestCategory("UITests")]
+        //public void BrowseToExercisePageTest()
+        //{
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
+        //        .ClickExercisesLink()
+        //        .VerifyExercisePageReached();
+        //}
+
+        //[TestMethod]
+        ////[TestCategory("UITests")]
+        //public void BrowseToCreateExerciseEntryTest()
+        //{
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
+        //        .ClickExercisesLink()
+        //        .VerifyExercisePageReached()
+        //        .ClickCreateNewLink()
+        //        .VerifyCreatePageReached();
+        //}
 
 
-        [TestMethod]
-        //[TestCategory("UITestsBroken")]
-        public void BrowseToMyMetricsPageTest()
-        {
-            _homePage.BrowseToHomePage(_homePageUrl)
-                .VerifyHomePageReached()
-                .ClickMyMetricsLink()
-                .VerifyMyMeticsPageReached();
+        //[TestMethod]
+        ////[TestCategory("UITestsBroken")]
+        //public void BrowseToMyMetricsPageTest()
+        //{
+        //    _homePage.BrowseToHomePage(_homePageUrl)
+        //        .VerifyHomePageReached()
+        //        .ClickMyMetricsLink()
+        //        .VerifyMyMeticsPageReached();
 
-        }
+        //}
         #endregion
     }
 }
